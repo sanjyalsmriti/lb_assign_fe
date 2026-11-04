@@ -1,3 +1,5 @@
+import type { LookupOption } from "@/types/api";
+
 export const ENTRY_STATUSES = ["arrived", "verified", "rejected", "exited", "voided"] as const;
 export type EntryStatus = (typeof ENTRY_STATUSES)[number];
 
@@ -69,3 +71,10 @@ export interface VoidRequest {
 }
 
 export type LookupType = "checkpoints" | "transporters" | "products" | "vehicle-types";
+
+export interface EntryLookups {
+  checkpoints: LookupOption[];
+  transporters: LookupOption[];
+  products: LookupOption[];
+  vehicleTypes: LookupOption[];
+}

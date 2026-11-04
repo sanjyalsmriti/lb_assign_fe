@@ -40,6 +40,19 @@ export const entrySchema = z.object({
 
 export type EntryInput = z.infer<typeof entrySchema>;
 
+// the form works with a datetime-local value (Nepal time), converted to ISO on submit
+export const entryFormSchema = entrySchema.extend({
+  arrivedAt: required("Arrival time")
+    .regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/, "Arrival time is required")
+    .refine(
+      (value) => Date.parse(`${value}:00+05:45`) <= Date.now() + 60_000,
+      "Arrival time can't be in the future",
+    ),
+});
+
+export type EntryFormInput = z.input<typeof entryFormSchema>;
+export type EntryFormValues = z.output<typeof entryFormSchema>;
+
 export const reasonSchema = z
   .string({ error: "Please give a reason" })
   .trim()
