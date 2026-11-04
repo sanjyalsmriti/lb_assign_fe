@@ -77,7 +77,7 @@ export function DataTable<T extends RowData>({
 
   return (
     <div className={cn("transition-opacity", isFetching && !isLoading && "opacity-60")}>
-      <div className={cn("rounded-xl border bg-card", renderMobileCard && "hidden md:block")}>
+      <div className={cn("rounded-xl border bg-card", renderMobileCard && "hidden lg:block")}>
         <Table aria-busy={isLoading || isFetching}>
           {caption && <caption className="sr-only">{caption}</caption>}
           <TableHeader className="bg-muted/40">
@@ -157,7 +157,7 @@ export function DataTable<T extends RowData>({
       </div>
 
       {renderMobileCard && (
-        <div className="space-y-3 md:hidden">
+        <div className="grid gap-3 sm:grid-cols-2 lg:hidden">
           {isLoading &&
             Array.from({ length: 4 }, (_, i) => (
               <div key={i} className="space-y-3 rounded-xl border bg-card p-4">
@@ -167,7 +167,7 @@ export function DataTable<T extends RowData>({
               </div>
             ))}
           {!isLoading && rows.map((row) => <div key={row.id}>{renderMobileCard(row.original)}</div>)}
-          {showEmpty && <div className="rounded-xl border bg-card">{emptyState}</div>}
+          {showEmpty && <div className="rounded-xl border bg-card sm:col-span-2">{emptyState}</div>}
         </div>
       )}
     </div>
