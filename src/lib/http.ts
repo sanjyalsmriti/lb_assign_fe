@@ -1,19 +1,11 @@
 import axios, { AxiosError } from "axios";
 import type { ApiErrorBody } from "@/types/api";
 import { ApiError } from "./api-error";
-import { isSimulatingErrors, MOCK_FAIL_HEADER } from "./simulate-errors";
 
 export const http = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "/api",
   timeout: 15_000,
   headers: { "Content-Type": "application/json" },
-});
-
-http.interceptors.request.use((config) => {
-  if (isSimulatingErrors()) {
-    config.headers.set(MOCK_FAIL_HEADER, "1");
-  }
-  return config;
 });
 
 http.interceptors.response.use(

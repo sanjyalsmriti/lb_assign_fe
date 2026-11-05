@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ClipboardList, PlusCircle, Truck } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SimulateErrorsToggle } from "./simulate-errors-toggle";
 
 const NAV_ITEMS = [
   { href: "/checkpoint-entries", label: "Checkpoint Entries", icon: ClipboardList, exact: false },
@@ -56,10 +55,6 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
           );
         })}
       </nav>
-
-      <div className="border-t p-3">
-        <SimulateErrorsToggle />
-      </div>
     </div>
   );
 }

@@ -19,7 +19,6 @@ The app runs on a self-contained mock backend (Next.js Route Handlers). It never
 - Status badges, breadcrumbs, toasts, loading skeletons, empty states and error states with retry.
 - Responsive layout: a table on desktop, cards on tablet and mobile, and a slide-out navigation on small screens.
 - Keyboard accessible: skip link, visible focus, labelled controls, focus trapped in dialogs, `aria-sort` on sortable columns.
-- A **Simulate API errors** switch in the sidebar forces every request to fail, so error and retry states can be tested.
 
 ## Tech stack
 
@@ -97,7 +96,7 @@ src/
 │   ├── status/           # StatusBadge
 │   ├── layout/           # AppShell, SidebarNav, PageHeader
 │   └── ui/               # shadcn primitives
-├── lib/                  # axios client, ApiError, formatting, error simulation flag
+├── lib/                  # axios client, ApiError, formatting
 ├── mock/                 # mock data, in-memory store, services, HTTP helpers
 └── types/                # shared API response types
 ```
@@ -181,14 +180,14 @@ Arrived ──verify──▶ Verified ──exit──▶ Exited
 | 409 | `NOT_EDITABLE` | Editing an entry that is no longer Arrived |
 | 409 | `INVALID_TRANSITION` | Action not allowed from the current status |
 | 422 | `VALIDATION_ERROR` | Field validation failed (`fieldErrors` included) |
-| 500 | `SERVER_ERROR` | Simulated or unexpected failure |
+| 500 | `SERVER_ERROR` | Unexpected server failure |
 
 ### Data, delays and failures
 
 - 140 entries are seeded from a fixed random seed, so the data looks realistic and is identical on every start. They cover the last three weeks across 6 checkpoints, Nepali vehicle numbers, drivers and transporters, and a status history that matches each status.
 - Data lives in memory on the server. It persists across page reloads and navigation, and resets when the server restarts.
 - Every request waits around `MOCK_DELAY_MS` so loading states are visible.
-- Failures can be triggered in three ways: the **Simulate API errors** switch (sends `x-mock-fail: 1`), `MOCK_FAILURE_RATE`, or real validation and business-rule errors.
+- Failures can be triggered via `MOCK_FAILURE_RATE`, or real validation and business-rule errors.
 
 ## Connecting a real backend
 
@@ -198,7 +197,7 @@ The UI never imports from `src/mock`. It only uses the functions in `src/feature
 2. If the backend uses different paths or response shapes, adapt them in `entries-api.ts` only. Map the response to the existing `CheckpointEntry` / `PaginatedResponse` types there.
 3. If the backend uses a different error body, adjust the response interceptor in `src/lib/http.ts` so it still produces an `ApiError` with `status`, `code`, `message` and `fieldErrors`.
 4. Add auth (for example a bearer token) in the axios request interceptor.
-5. Delete `src/app/api` and `src/mock`, and remove the simulate switch from `AppShell`.
+5. Delete `src/app/api` and `src/mock`.
 
 Components, hooks, forms and query keys stay unchanged.
 

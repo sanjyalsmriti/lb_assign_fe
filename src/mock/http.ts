@@ -1,5 +1,4 @@
 import type { FieldErrors } from "@/types/api";
-import { MOCK_FAIL_HEADER } from "@/lib/simulate-errors";
 
 export class HttpError extends Error {
   constructor(
@@ -36,8 +35,7 @@ function sleep(ms: number) {
 export async function handle(request: Request, handler: () => Response | Promise<Response>) {
   await sleep(BASE_DELAY * (0.5 + Math.random()));
 
-  const forcedFail = request.headers.get(MOCK_FAIL_HEADER) === "1";
-  if (forcedFail || Math.random() < FAILURE_RATE) {
+  if (Math.random() < FAILURE_RATE) {
     return errorResponse(500, "SERVER_ERROR", "The server ran into a problem. Please try again.");
   }
 
