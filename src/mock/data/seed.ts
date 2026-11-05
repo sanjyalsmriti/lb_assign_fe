@@ -9,7 +9,7 @@ const DRIVERS = [
   "Ram Bahadur Thapa", "Shyam Kumar Yadav", "Bikash Gurung", "Sanjay Chaudhary",
   "Dipendra Rai", "Hari Prasad Adhikari", "Raju Shrestha", "Mohan Tamang",
   "Suresh Mahato", "Krishna Bhandari", "Prakash Magar", "Anil Kumar Shah",
-  "Dinesh Karki", "Gopal Sah", "Nabin Lama", "Bishnu Poudel", "Rajendra Mandal",
+  "Rajan Karki", "Gopal Sah", "Nabin Lama", "Bishnu Poudel", "Rajendra Mandal",
   "Santosh Khadka", "Kamal Thakur", "Arjun Bhattarai", "Bhim Bahadur KC",
   "Manoj Kushwaha", "Ganesh Limbu", "Sunil Pandey",
 ];

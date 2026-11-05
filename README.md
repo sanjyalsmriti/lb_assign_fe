@@ -39,8 +39,8 @@ The app runs on a self-contained mock backend (Next.js Route Handlers). It never
 Requires Node.js 20.9+.
 
 ```bash
-git clone git@github.com:dineshbajgain/tqms-checkpoint-frontend.git
-cd tqms-checkpoint-frontend
+git clone https://github.com/sanjyalsmriti/lb_assign_fe.git
+cd lb_assign_fe
 npm install
 cp .env.example .env.local   # optional, defaults work without it
 npm run dev
