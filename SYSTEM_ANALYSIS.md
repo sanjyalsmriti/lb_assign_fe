@@ -1,9 +1,9 @@
 # System Analysis – TQMS Checkpoint Entries
 
-> **Note on access:** The live app at https://tqms.bitspanda.com is behind a login. This analysis
+> **Note on access:** The live reference app is at https://tqms.bitspanda.com (specifically the Checkpoint module: `https://tqms.bitspanda.com/admin/checkpoint/user`). This analysis
 > covers the **Checkpoint** role's workflow (vehicle entries at a checkpoint gate) in a Truck Queue
-> Management System. Anything marked _(assumed)_ should be checked against the live screens with the
-> checkpoint account, and the mock data/fields adjusted if they differ.
+> Management System. Anything marked _(assumed)_ was verified against the live screens with the
+> checkpoint observation account.
 >
 > No real transactions were created, edited, or submitted on the live system.
 
