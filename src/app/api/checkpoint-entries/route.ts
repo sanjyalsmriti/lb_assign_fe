@@ -10,7 +10,7 @@ export function POST(request: NextRequest) {
   return handle(request, async () => {
     const entry = createEntry(await readJson(request));
     return json(
-      { data: entry },
+      { data: entry, message: "Checkpoint entry created successfully" },
       { status: 201, headers: { Location: `/api/checkpoint-entries/${entry.id}` } },
     );
   });

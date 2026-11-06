@@ -6,7 +6,7 @@ The app runs on a self-contained mock backend (Next.js Route Handlers). It never
 
 - System analysis: [SYSTEM_ANALYSIS.md](./SYSTEM_ANALYSIS.md)
 - Screenshots and walkthrough video: [media/](./media)
-- Live demo: _add Vercel URL here_
+- Live demo: [https://fe-task-p68zi60rq-smiriti-sanjyals-projects.vercel.app/checkpoint-entries](https://fe-task-p68zi60rq-smiriti-sanjyals-projects.vercel.app/checkpoint-entries)
 
 ![Entry list](media/02-list.png)
 
@@ -105,7 +105,7 @@ Features own their API calls, hooks, schemas and components. Only feature-agnost
 
 ## Mock API
 
-All responses are JSON. Successful responses look like `{ data }`, and list responses also include `{ meta }`. Errors always use the same shape:
+All responses are JSON. Successful responses look like `{ data, message }`, and list responses also include `{ meta }`. Errors always use the same shape:
 
 ```json
 {
@@ -152,6 +152,7 @@ curl "http://localhost:3000/api/checkpoint-entries?status=arrived&sort=arrivedAt
 ```json
 {
   "data": [{ "id": "…", "entryNo": "CP-2611-0137", "vehicleNo": "LU 1 CHA 5471", "status": "arrived", "…": "…" }],
+  "message": "Checkpoint entries retrieved successfully",
   "meta": { "page": 1, "pageSize": 1, "total": 13, "totalPages": 13 }
 }
 ```
@@ -187,7 +188,7 @@ Arrived ──verify──▶ Verified ──exit──▶ Exited
 - 140 entries are seeded from a fixed random seed, so the data looks realistic and is identical on every start. They cover the last three weeks across 6 checkpoints, Nepali vehicle numbers, drivers and transporters, and a status history that matches each status.
 - Data lives in memory on the server. It persists across page reloads and navigation, and resets when the server restarts.
 - Every request waits around `MOCK_DELAY_MS` so loading states are visible.
-- Failures can be triggered via `MOCK_FAILURE_RATE`, or real validation and business-rule errors.
+- Failures can be triggered via `MOCK_FAILURE_RATE`, by passing `?simulateError=500` in the URL or header `x-simulate-error: 500`, or via real validation and business-rule errors.
 
 ## Connecting a real backend
 

@@ -6,6 +6,6 @@ export function GET(request: NextRequest, ctx: RouteContext<"/api/lookup/[type]"
   return handle(request, async () => {
     const { type } = await ctx.params;
     if (!(type in lookups)) throw notFound(`Lookup "${type}"`);
-    return json({ data: lookups[type as keyof typeof lookups] });
+    return json({ data: lookups[type as keyof typeof lookups], message: "Lookup options retrieved successfully" });
   });
 }

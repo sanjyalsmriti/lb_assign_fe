@@ -7,11 +7,13 @@ export interface PageMeta {
 
 export interface PaginatedResponse<T> {
   data: T[];
+  message: string;
   meta: PageMeta;
 }
 
 export interface ItemResponse<T> {
   data: T;
+  message: string;
 }
 
 export type FieldErrors = Record<string, string[]>;

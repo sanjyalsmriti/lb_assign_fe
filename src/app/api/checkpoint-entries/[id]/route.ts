@@ -7,14 +7,14 @@ type Context = RouteContext<"/api/checkpoint-entries/[id]">;
 export function GET(request: NextRequest, ctx: Context) {
   return handle(request, async () => {
     const { id } = await ctx.params;
-    return json({ data: getEntry(id) });
+    return json({ data: getEntry(id), message: "Checkpoint entry retrieved successfully" });
   });
 }
 
 export function PATCH(request: NextRequest, ctx: Context) {
   return handle(request, async () => {
     const { id } = await ctx.params;
-    return json({ data: updateEntry(id, await readJson(request)) });
+    return json({ data: updateEntry(id, await readJson(request)), message: "Checkpoint entry updated successfully" });
   });
 }
 
@@ -22,6 +22,6 @@ export function PATCH(request: NextRequest, ctx: Context) {
 export function DELETE(request: NextRequest, ctx: Context) {
   return handle(request, async () => {
     const { id } = await ctx.params;
-    return json({ data: voidEntry(id, await readJson(request)) });
+    return json({ data: voidEntry(id, await readJson(request)), message: "Checkpoint entry voided successfully" });
   });
 }

@@ -25,8 +25,7 @@ import { cn } from "@/lib/utils";
 const features = tableFeatures({ rowSortingFeature });
 
 export type TableFeatures = typeof features;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type DataTableColumn<T extends RowData> = ColumnDef<TableFeatures, T, any>;
+export type DataTableColumn<T extends RowData, TValue = unknown> = ColumnDef<TableFeatures, T, TValue>;
 
 export function columnHelper<T extends RowData>() {
   return createColumnHelper<TableFeatures, T>();

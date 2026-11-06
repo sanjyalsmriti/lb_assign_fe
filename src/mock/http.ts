@@ -35,7 +35,13 @@ function sleep(ms: number) {
 export async function handle(request: Request, handler: () => Response | Promise<Response>) {
   await sleep(BASE_DELAY * (0.5 + Math.random()));
 
-  if (Math.random() < FAILURE_RATE) {
+  const url = new URL(request.url);
+  const simulateError =
+    url.searchParams.get("simulateError") === "500" ||
+    request.headers.get("x-simulate-error") === "500" ||
+    (FAILURE_RATE > 0 && Math.random() < FAILURE_RATE);
+
+  if (simulateError) {
     return errorResponse(500, "SERVER_ERROR", "The server ran into a problem. Please try again.");
   }
 

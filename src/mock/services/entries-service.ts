@@ -126,6 +126,7 @@ export function listEntries(searchParams: URLSearchParams): PaginatedResponse<Ch
 
   return {
     data: filtered.slice(start, start + q.pageSize),
+    message: "Checkpoint entries retrieved successfully",
     meta: { page: q.page, pageSize: q.pageSize, total, totalPages },
   };
 }
