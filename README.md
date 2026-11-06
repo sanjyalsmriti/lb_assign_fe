@@ -5,10 +5,10 @@ A rebuild of the **Checkpoint Entries** workflow from the Truck Queue Management
 The app runs on a self-contained mock backend (Next.js Route Handlers). It never talks to the production system or its database.
 
 - System analysis: [SYSTEM_ANALYSIS.md](./SYSTEM_ANALYSIS.md)
-- Screenshots and walkthrough video: [media/](./media)
+- Walkthrough video: [media/walkthrough.mp4](./media/walkthrough.mp4)
 - Live demo: [https://fe-task-p68zi60rq-smiriti-sanjyals-projects.vercel.app/checkpoint-entries](https://fe-task-p68zi60rq-smiriti-sanjyals-projects.vercel.app/checkpoint-entries)
 
-![Entry list](media/02-list.png)
+![Checkpoint Entries Overview](media/02-list.png)
 
 ## Features
 
@@ -231,19 +231,26 @@ Components, hooks, forms and query keys stay unchanged.
 - Skeletons match the final layout to avoid layout shift. Background refreshes dim the current rows instead of replacing them with skeletons.
 - Columns are memoized and rows use stable ids.
 
-## Screenshots
+## Walkthrough & Media
 
-| | |
-| --- | --- |
-| Loading skeleton ![](media/01-list-loading.png) | Filters applied ![](media/03-list-filtered.png) |
-| No results ![](media/04-list-no-results.png) | Entry detail ![](media/05-detail.png) |
-| Verify confirmation ![](media/06-verify-dialog.png) | Verified with token ![](media/07-detail-verified.png) |
-| Row actions ![](media/08-row-actions.png) | Reject with reason ![](media/09-reject-dialog.png) |
-| Form validation ![](media/10-form-validation.png) | Server field error ![](media/11-form-server-error.png) |
-| Void reason required ![](media/13-void-validation.png) | Error with retry ![](media/15-error-retry.png) |
-| Tablet ![](media/19-tablet-list.png) | Mobile ![](media/16-mobile-list.png) |
+A video walkthrough demonstrating all Checkpoint Entries workflows is included:
 
-A full walkthrough video is in [media/walkthrough.mp4](media/walkthrough.mp4).
+- **Web-optimized video:** [media/walkthrough.mp4](media/walkthrough.mp4) (H.264 / AAC, streamable directly in-browser)
+- **Original screen recording:** [media/Screen Recording 2026-11-06 at 20.36.59.mov](<media/Screen Recording 2026-11-06 at 20.36.59.mov>)
+
+### Key workflows shown in the walkthrough:
+1. **List view**: Table rendering, sorting by arrival time/quantity/entry number, and debounced text search across multiple fields.
+2. **Multi-criteria filtering**: Statuses (multi-select), checkpoints, vehicle types, purpose, and date ranges with immediate URL query synchronization.
+3. **Responsive layouts**: Desktop data-table and adaptive mobile/tablet card views with slide-out sheet navigation.
+4. **New Entry creation**: Complete form input with client-side Zod validation, Nepali license regex, and server error mapping.
+5. **Entry details**: Vehicle, load, checkpoint gate assignment, and status activity timeline.
+6. **Editing records**: Modifying details while in the `Arrived` state.
+7. **Status actions & token issuance**:
+   - **Verify**: Issues sequential queue token (`T-NNNN`) and moves truck to queue.
+   - **Reject**: Requires a mandatory explanation reason (minimum 5 characters).
+   - **Exit**: Records gate exit timestamp.
+   - **Void**: Soft-deletes erroneous records while retaining audit logs.
+8. **Feedback & UI states**: Skeletons, empty states, error boundaries, and toast notifications.
 
 ## Known limitations
 
